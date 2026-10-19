@@ -159,7 +159,20 @@ else:
 # del 3 % o menys; acceptable si és de 150 ms o menys i la pèrdua és del 5 %
 # o menys; en qualsevol altre cas, deficient.
 
+lat = float(input("Introduzca la latencia en milisegundos: "))
+perc_paquets_perduts = float(input("Introduzca el porcentaje de paquetes perdidos (0 al 100): "))
 
+if(perc_paquets_perduts >= 0 and perc_paquets_perduts<= 100):
+    if(perc_paquets_perduts <= 1 and lat <= 30):
+        connexio = "excelente"
+    elif(1 < perc_paquets_perduts <= 3 and 30 < lat <= 80):
+        connexcio = "bona"
+    elif (3 < perc_paquets_perduts <= 5 and 80 < lat <= 180):
+        connexio = "acceptable"
+    else:
+        connexio = "deficient"
+else:
+    print("El valor está fuera del rango")
 
 # Exercici 11: Cost mensual d'un pla de dades
 # Demana el tipus de pla (bàsic o plus) i el consum mensual en GB.
@@ -168,12 +181,41 @@ else:
 # Rebutja un consum negatiu o un tipus de pla desconegut. Calcula i mostra el
 # cost total, tenint en compte que no es cobra l'excés si no se supera el límit.
 
+pla = input("Introduzca el plan (basico o plus): ")
+cons = float(input("Introduzca el consumo mensual en GB: "))
+
+if(pla in ("basico", "plus") and cons > 0):
+    if pla == "basico":
+        cost_total = 10 + (10 - round(cons))*(-1.5)
+    else:
+        cost_total = 20 + (30 - round(cons))* (-.75)
+
+else:
+    print("El plan introducido es desconocido o introdujo un consumo negativo ")
+
 # Exercici 12: Accés a un compte de client
 # Demana si el compte està actiu, si la contrasenya és correcta i si el codi
 # de doble verificació és correcte. Demana el codi només si el compte és actiu
 # i la contrasenya és correcta. Indica si l'accés es denega perquè el compte
 # està desactivat, perquè la contrasenya és incorrecta o perquè falla el codi;
 # si totes les comprovacions necessàries són correctes, permet l'accés.
+
+cuenta_estat = input("¿Está activa la cuenta? (s/n): ")
+contra_estat = input("¿Es correcta la contraseña? (s/n): ")
+codi_estat = input("¿Es correcto el codigo de doble verificacion? (s/n):")
+
+if (cuenta_estat in ("s", "n")) and (contra_estat in ("s", "n")) and (codi_estat in ("s", "n")):
+    if (cuenta_estat == "n"):
+        print("La cuenta no está activa")
+    elif(contra_estat == "n"):
+        print("La contraseña no es correcta")
+    elif(codi_estat == "n"):
+        print("El código de doble verificación no es correcto")
+    else:
+        print("Acceso permitido")
+
+else:
+    print("Introduzca s o n")
 
 # Exercici 13: Diagnòstic d'un router
 # Demana si el router està encès, si l'indicador LOS del terminal òptic està
@@ -182,9 +224,40 @@ else:
 # de fibra (LOS encès), si cal contactar amb el proveïdor (Internet apagat) o
 # si la connexió funciona correctament. Considera els casos en aquest ordre.
 
+router = input("Está encés el router? (s/n): ")
+indicador_los = input("Está encés l'indicador LOS del terminal optic? (s/n): ")
+indicador_int = input("Está encés l'indicador d'Internet? (s/n): ")
+
+if(indicador_los in ("s", "n")) and indicador_int in ("s", "n"):
+    if (router == "n"):
+        print("Has d'encendre el router")
+    else:
+        if(indicador_los == "n"):
+            print("Has de revisar el cable de fibra")
+        elif(indicador_int == "n"):
+            print("Has de contactar amb el proveidor")
+        else:
+            print("La connexió funciona correctament")
+else:
+    print("Introduzca s o n")
+
 # Exercici 14: Prioritat d'una incidència de xarxa
 # Demana si la incidència afecta un servei crític, el nombre d'usuaris afectats
 # i si hi ha una alternativa de connexió disponible. Rebutja un nombre negatiu
 # d'usuaris. Assigna prioritat crítica si afecta un servei crític i no hi ha
 # alternativa, o si afecta almenys 50 usuaris i no hi ha alternativa; alta si
 # afecta almenys 10 usuaris o un servei crític; en qualsevol altre cas, baixa.
+
+serv_afectat = input("La incidencia afecta a un servicio crítico? (s/n): ")
+n_afectats = int(input("Introduzca el número de usuarios afectados"))
+alt_disp = input("Hay alguna alternativa disponible? (s/n): ")
+
+if(n_afectats >= 0):
+    if ((serv_afectat == "s" or n_afectats >= 50) and alt_disp == "n"):
+        prioritat = "critica"
+    elif (10<= n_afectats < 50 or serv_afectat == "s"):
+        prioritat = "alta"
+    else:
+        prioritat = "baja"
+else:
+    print("No se aceptan valores negativos para el número de afectados")

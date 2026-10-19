@@ -9,6 +9,11 @@
 # Insereix-hi el nombre 10 a la posició 2 fent servir insert().
 # Modifica el primer element de la llista perquè sigui 0.
 
+llista = [1, 2, 3, 4, 5]
+llista.append(6)
+llista.insert(2, 10)
+llista[0] = 0
+
 # Exercici 2: Combinar i buidar llistes
 # Crea dues llistes:
 # llista_a = [1, 2, 3]
@@ -18,17 +23,37 @@
 # Elimina l'element de l'índex 3 de llista_a fent servir pop(). Imprimeix l'element eliminat.
 # Buida completament llista_b fent servir clear().
 
+llista_a = [1, 2, 3]
+llista_b = [4, 5, 6, 1, 2]
+
+llista_a.extend(llista_b)
+
+llista_a.remove(1)
+llista_a.pop(3)
+
 # Exercici 3: Slicing i eliminació amb del
 # Crea una llista amb els nombres de l'1 al 10.
 # Fes servir slicing i del per eliminar els elements des de l'índex 2 fins al 5
 # (sense incloure el 5).
 # Imprimeix la llista resultant.
 
+llista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+del llista [2:5]
+print(llista)
+
 # Exercici 4: Ordenar i comptar
 # Crea una llista amb els nombres següents: [5, 2, 8, 1, 9, 4, 2].
 # Ordena la llista de manera ascendent fent servir sort().
 # Compta quantes vegades apareix el nombre 2 a la llista fent servir count().
 # Comprova si el nombre 7 és a la llista fent servir in.
+
+lista = [5, 2, 8, 1, 9, 4, 2]
+lista.sort(reverse=False)
+n_dos = lista.count(2)
+set_dins = False
+
+if (7 in lista): set_dins = True
 
 # Exercici 5: Còpia i referència
 # Crea una llista anomenada original amb els nombres [1, 2, 3].
@@ -38,6 +63,21 @@
 # Modifica a 10 el primer element de la llista referencia.
 # Imprimeix les quatre llistes (original, copia_1, copia_2 i referencia) i observa'n els canvis.
 
+original = [1, 2, 3]
+copia_1 = original[:]
+copia_2 = original.copy()
+referencia = original
+referencia[0] = 10
+print(original, "\n", copia_1, "\n", copia_2, "\n", referencia)
+
+#Al hacer la referencia y modificarla, también se modifica la lista original
+#mientras que con copy() y con slicing ambas listas quedan iguales a pesar del cambio
+
 # Exercici 6: Ordenar cadenes sense distingir entre majúscules i minúscules
 # Crea una llista amb les cadenes següents: ["Poma", "pera", "PLÀTAN", "taronja"].
 # Ordena la llista sense distingir entre majúscules i minúscules.
+
+frutas = ["Poma", "pera", "PLÀTAN", "taronja"]
+
+frutas.sort(key = str.lower)
+print(frutas)
